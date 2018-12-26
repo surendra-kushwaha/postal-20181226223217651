@@ -24,7 +24,7 @@ var cors = require('cors');
 var ws = require('ws');											// websocket module
 var winston = require('winston');								// logger module
 
-// ------------- Init our libraries ------------- //
+// ------------- Init our libraries -------------- //
 var wss = {};
 var marbles_lib = null;
 var logger = new (winston.Logger)({
