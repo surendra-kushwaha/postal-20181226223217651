@@ -5,7 +5,7 @@
 // - from here we can interact with our chaincode.
 //   - the cc_function is the chaincode function we will call
 //   - the cc_args are the arguments to pass to your chaincode function
-//-------------------------------------------------------------------
+//--------------------------------------------------------------------
 
 module.exports = function (enrollObj, g_options, fcw, logger) {
 	var marbles_chaincode = {};
