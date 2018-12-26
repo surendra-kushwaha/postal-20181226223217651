@@ -155,7 +155,7 @@ stages:
         -F 'files[]=@./chaincode/src/marbles/read_ledger.go' \
         -F 'files[]=@./chaincode/src/marbles/write_ledger.go' \
         -F chaincode_id=$CHAINCODE_ID \
-        -F chaincode_version=$GIT_CC_HASH \
+        -F chaincode_version=$GIT_HASH \
         --connect-timeout 60 || true)
       printf "\nResp: $INSTALL_RESP\n"
       INSTALLED=$(echo "$INSTALL_RESP" | jq '.message' -r || true)    # parse the install response for the "message" field
@@ -187,7 +187,7 @@ stages:
           -H 'Cache-Control: no-cache' \
           -H 'Content-Type: application/json' \
           -u $API_KEY:$API_SECRET \
-          -d '{"chaincode_id":"'"$CHAINCODE_ID"'", "chaincode_version":"'"$GIT_CC_HASH"'", "chaincode_arguments":"[\"12345\"]"}' \
+          -d '{"chaincode_id":"'"$CHAINCODE_ID"'", "chaincode_version":"'"$GIT_HASH"'", "chaincode_arguments":"[\"12345\"]"}' \
           --connect-timeout 240 || true)
         printf "\nResp: $INSTANTIATE_RESP\n"
         INSTANTIATED=$(echo "$INSTANTIATE_RESP" | jq '.message' -r || true)  # parse the instantiate response for the "message" field
@@ -245,7 +245,7 @@ stages:
       echo "Creating env variables for mables..."
       cf set-env $CF_APP CONNECTION_PROFILE "$CONNECTION_PROFILE" > /dev/null
       cf set-env $CF_APP CHAINCODE_ID $CHAINCODE_ID           # pass these to the app so we know which one to use
-      cf set-env $CF_APP CHAINCODE_VERSION $GIT_CC_HASH
+      cf set-env $CF_APP CHAINCODE_VERSION $GIT_HASH
       cf set-env $CF_APP CHANNEL_ID $CHANNEL_ID
       cf set-env $CF_APP MSP_ID $MSP_ID
       export APP_URL=$(cf app $CF_APP | grep -Po "(?<=routes:)\s*\S*")
