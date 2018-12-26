@@ -58,7 +58,7 @@ func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	key = args[0]
 	valAsbytes, err := stub.GetState(key)           //get the var from ledger
 	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
+		jsonResp = "{\"Error\":\"Failed to get state for:::: " + key + "\"}"
 		return shim.Error(jsonResp)
 	}
 
